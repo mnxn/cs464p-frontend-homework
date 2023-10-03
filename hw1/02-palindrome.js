@@ -5,6 +5,21 @@ elem.addEventListener("input", handleInput);
 
 function handleInput(event) {
   const original = parseFloat(elem.value);
+
+  if (isNaN(original)) {
+    output.className = "";
+    output.textContent = "";
+    return;
+  } else if (original < 0) {
+    output.className = "text-danger";
+    output.textContent = "Input must not be negative.";
+    return;
+  } else if (original % 1 !== 0) {
+    output.className = "text-danger";
+    output.textContent = "Input must not have a decimal component.";
+    return;
+  }
+
   let reversed = 0;
   for (let x = original; x > 0; x = Math.floor(x / 10)) {
     reversed *= 10;
