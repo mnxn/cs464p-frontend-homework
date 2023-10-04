@@ -1,22 +1,20 @@
-const elem = document.querySelector("input");
-const output = document.querySelector("#output");
+const elem = document.querySelector('input');
+const output = document.querySelector('#output');
 
-elem.addEventListener("input", handleInput);
-
-function handleInput(event) {
+const handleInput = function handleInput() {
   const original = parseFloat(elem.value);
 
-  if (isNaN(original)) {
-    output.className = "";
-    output.textContent = "";
+  if (Number.isNaN(original)) {
+    output.className = '';
+    output.textContent = '';
     return;
-  } else if (original < 0) {
-    output.className = "text-danger";
-    output.textContent = "Input must not be negative.";
+  } if (original < 0) {
+    output.className = 'text-danger';
+    output.textContent = 'Input must not be negative.';
     return;
-  } else if (original % 1 !== 0) {
-    output.className = "text-danger";
-    output.textContent = "Input must not have a decimal component.";
+  } if (original % 1 !== 0) {
+    output.className = 'text-danger';
+    output.textContent = 'Input must not have a decimal component.';
     return;
   }
 
@@ -34,10 +32,12 @@ function handleInput(event) {
   }
 
   if (reversed === original) {
-    output.className = "text-success";
-    output.textContent = "Yes. This is a palindrome!";
+    output.className = 'text-success';
+    output.textContent = 'Yes. This is a palindrome!';
   } else {
-    output.className = "text-danger";
-    output.textContent = "No. Try again.";
+    output.className = 'text-danger';
+    output.textContent = 'No. Try again.';
   }
-}
+};
+
+elem.addEventListener('input', handleInput);
