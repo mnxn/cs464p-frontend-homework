@@ -31,7 +31,6 @@ function handleInput(event) {
   for (let x = original; x > 0; x = Math.floor(x / 10)) {
     reversed *= 10;
     reversed += x % 10;
-    console.log(x, reversed);
   }
 
   if (reversed === original) {
