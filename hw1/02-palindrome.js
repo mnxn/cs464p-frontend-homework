@@ -9,11 +9,13 @@ const handleInput = function handleInput() {
     output.className = '';
     output.textContent = '';
     return;
-  } if (original < 0) {
+  }
+  if (original < 0) {
     output.className = 'text-danger';
     output.textContent = 'Input must not be negative.';
     return;
-  } if (original % 1 !== 0) {
+  }
+  if (original % 1 !== 0) {
     output.className = 'text-danger';
     output.textContent = 'Input must not have a decimal component.';
     return;
