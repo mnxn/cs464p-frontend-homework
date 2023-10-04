@@ -1,8 +1,8 @@
-const elem = document.querySelector('input');
+const numberInput = document.querySelector('#number-input');
 const output = document.querySelector('#output');
 
 const handleInput = function handleInput() {
-  const original = parseFloat(elem.value);
+  const original = parseFloat(numberInput.value);
 
   if (Number.isNaN(original)) {
     output.className = '';
@@ -40,4 +40,4 @@ const handleInput = function handleInput() {
   }
 };
 
-elem.addEventListener('input', handleInput);
+numberInput.addEventListener('input', handleInput);
