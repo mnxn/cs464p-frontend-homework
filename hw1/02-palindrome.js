@@ -5,6 +5,7 @@ const handleInput = function handleInput() {
   const original = parseFloat(numberInput.value);
 
   if (Number.isNaN(original)) {
+    // Remove message when input is empty (parsed as NaN).
     output.className = '';
     output.textContent = '';
     return;
