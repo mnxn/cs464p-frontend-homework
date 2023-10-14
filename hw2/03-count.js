@@ -4,6 +4,11 @@ const input = document.querySelector('#word-input');
 const originalText = textContainer.textContent;
 
 const handleKeyDown = function handleKeyDown(event) {
+  // This event is handled before any new characters are added to the input
+  // element's value. To simplify the handling of the user input, the default
+  // behavior is prevented and the changes to the input value are handled
+  // manually.Below, the reassignment to input.value changes what the user
+  // sees on the webpage as well as the value inside this script.
   event.preventDefault();
 
   if (event.key.length === 1) {
