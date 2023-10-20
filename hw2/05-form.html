@@ -27,20 +27,32 @@
 
         <div class="mb-3">
           <label for="name" class="form-label fw-bold">Full Name:</label>
-          <input id="name" class="form-control" name="name" type="text" />
+          <input
+            id="name"
+            class="form-control"
+            name="name"
+            type="text"
+            required
+          />
         </div>
 
         <div class="mb-3">
           <label for="email" class="form-label fw-bold">Email:</label>
-          <input id="email" class="form-control" name="email" type="email" />
+          <input
+            id="email"
+            class="form-control"
+            name="email"
+            type="email"
+            required
+          />
         </div>
 
         <div class="mb-3">
           <label for="status" class="form-label fw-bold">
             Registration Status:
           </label>
-          <select id="status" name="status" class="form-select">
-            <option selected hidden value="None">Choose an Option</option>
+          <select id="status" name="status" class="form-select" required>
+            <option selected hidden value="">Choose an Option</option>
             <option value="Registered">Registered</option>
             <option value="Waitlisted">Waitlisted</option>
             <option value="Dropped">Dropped</option>
