@@ -1,6 +1,7 @@
 const body = document.querySelector('body');
-const secondsInput = document.querySelector('#seconds');
-const startStop = document.querySelector('#start-stop');
+const form = document.querySelector('#seconds-form');
+const startStop = form.elements.startstop;
+const secondsInput = form.elements.seconds;
 
 // Firefox saves the seconds input value when tabs are refreshed/reopened.
 // The initial interval must also be set here to avoid the situation in
@@ -18,14 +19,12 @@ const changeColor = function changeColor() {
 
 const startChanging = function startChanging(secondsString) {
   const secondsNum = parseFloat(secondsString);
-  // Don't allow starting interval with invalid input
-  if (Number.isFinite(secondsNum) && secondsNum >= 1) {
-    const milliseconds = secondsNum * 1000;
-    changeColor();
-    interval = setInterval(changeColor, milliseconds);
-    startStop.value = 'Stop';
-    startStop.classList.replace('btn-primary', 'btn-danger');
-  }
+  const milliseconds = secondsNum * 1000;
+  changeColor();
+  interval = setInterval(changeColor, milliseconds);
+  startStop.value = 'Stop';
+  startStop.classList.replace('btn-primary', 'btn-danger');
+  secondsInput.disabled = true;
 };
 
 const stopChanging = function stopChanging() {
@@ -33,12 +32,14 @@ const stopChanging = function stopChanging() {
   interval = null;
   startStop.value = 'Start';
   startStop.classList.replace('btn-danger', 'btn-primary');
+  secondsInput.disabled = false;
 };
 
-const toggleChanging = function toggleChanging() {
+const toggleChanging = function toggleChanging(event) {
+  event.preventDefault();
   if (interval === null) startChanging(secondsInput.value);
   else stopChanging();
 };
 
 window.addEventListener('load', () => startChanging(initialInterval));
-startStop.addEventListener('click', () => toggleChanging());
+form.addEventListener('submit', toggleChanging);
