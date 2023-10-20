@@ -23,7 +23,7 @@
 14. order: 2;
 15. order: -1;
 16. align-self: end;
-17. order: 99;
+17. order: 1;
     align-self: end;
 18. flex-wrap: wrap;
 19. flex-wrap: wrap;
