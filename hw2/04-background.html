@@ -22,31 +22,34 @@
   </head>
   <body class="container pt-sm-5 pt-2">
     <main class="card p-3 pt-4 mx-auto main-card">
-      <h1 class="mb-4 fs-2">Exercise 04 - Background</h1>
-      <p>
-        The background color will change every few seconds (as indicated below).
-        You can stop this behavior and you can also change how often the
-        background color changes.
-      </p>
-      <div class="mb-4">
-        <label for="seconds">Background change interval (seconds): </label>
-        <input
-          id="seconds"
-          name="seconds"
-          type="number"
-          value="3"
-          min="1"
-          step="any"
-        />
-      </div>
-      <div>
-        <input
-          id="start-stop"
-          class="btn btn-primary"
-          type="button"
-          value="Start"
-        />
-      </div>
+      <form id="seconds-form">
+        <h1 class="mb-4 fs-2">Exercise 04 - Background</h1>
+        <p>
+          The background color will change every few seconds (as indicated
+          below). You can stop this behavior and you can also change how often
+          the background color changes.
+        </p>
+        <div class="mb-4">
+          <label for="seconds">Background change interval (seconds): </label>
+          <input
+            id="seconds"
+            name="seconds"
+            type="number"
+            value="3"
+            min="1"
+            step="any"
+          />
+        </div>
+        <div>
+          <input
+            id="start-stop"
+            name="startstop"
+            class="btn btn-primary"
+            type="submit"
+            value="Start"
+          />
+        </div>
+      </form>
     </main>
   </body>
 </html>
