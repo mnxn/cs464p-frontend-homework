@@ -91,12 +91,14 @@ const countHouses = function collectHouseLabelsAndCounts(characters) {
 const updatePage = async function fetchAndUpdatePage() {
   try {
     const response = await fetch(url);
-    if (response.ok) {
-      const characters = await response.json();
-      const [labels, data] = countHouses(characters);
-      loading.remove();
-      renderChart(labels, data);
+    if (!response.ok) {
+      throw response;
     }
+
+    const characters = await response.json();
+    const [labels, data] = countHouses(characters);
+    loading.remove();
+    renderChart(labels, data);
   } catch (error) {
     console.error('Failed to fetch data from thronesapi', error);
     loading.textContent = 'Failed to load character data.';
