@@ -17,3 +17,22 @@ h1 {
   border-radius: 0.8rem;
   background-color: var(--white);
 }
+
+.character-card {
+  width: 200px;
+  height: 320px;
+}
+
+.character-card:hover {
+  background-color: var(--blue);
+}
+
+.character-card h2,
+.character-card p {
+  color: var(--black);
+}
+
+.character-card:hover h2,
+.character-card:hover p {
+  color: var(--white);
+}
