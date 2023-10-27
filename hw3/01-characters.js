@@ -35,12 +35,14 @@ const characterElement = function createCharacterHtmlElement(character) {
 const updatePage = async function fetchAndUpdatePage() {
   try {
     const response = await fetch(url);
-    if (response.ok) {
-      const characters = await response.json();
-      characterContainer.replaceChildren(
-        ...characters.map(characterElement),
-      );
+    if (!response.ok) {
+      throw response;
     }
+
+    const characters = await response.json();
+    characterContainer.replaceChildren(
+      ...characters.map(characterElement),
+    );
   } catch (error) {
     console.error('Failed to fetch data from thronesapi', error);
     loading.textContent = 'Failed to load character data.';
