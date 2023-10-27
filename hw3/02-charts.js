@@ -29,17 +29,24 @@ const borderColors = [
 // url for the Thrones API
 const url = 'https://thronesapi.com/api/v2/Characters';
 
-const renderChart = () => {
+const loading = document.querySelector('#loading');
+
+const renderChart = function renderDonutChart(labels, data) {
   const donutChart = document.querySelector('.donut-chart');
 
   new Chart(donutChart, {
     type: 'doughnut',
+    options: {
+      legend: {
+        position: 'bottom',
+      },
+    },
     data: {
-      labels: ['label', 'label', 'label', 'label'],
+      labels,
       datasets: [
         {
           label: 'My First Dataset',
-          data: [1, 12, 33, 5],
+          data,
           backgroundColor: backgroundColors,
           borderColor: borderColors,
           borderWidth: 1,
@@ -49,4 +56,51 @@ const renderChart = () => {
   });
 };
 
-renderChart();
+const countHouses = function collectHouseLabelsAndCounts(characters) {
+  const counter = new Map();
+  characters.forEach((c) => {
+    const trimmedFamily = c.family.replace(/^House /, '');
+    const oldCount = counter.get(trimmedFamily);
+    counter.set(
+      trimmedFamily,
+      oldCount === undefined
+        ? 1 : oldCount + 1,
+    );
+  });
+
+  const labels = [];
+  const counts = [];
+  let other = 0;
+
+  counter.forEach((count, family) => {
+    if (count > 1) {
+      labels.push(family);
+      counts.push(count);
+    } else {
+      other += 1;
+    }
+  });
+
+  if (other >= 1) {
+    labels.push('Other');
+    counts.push(other);
+  }
+  return [labels, counts];
+};
+
+const updatePage = async function fetchAndUpdatePage() {
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const characters = await response.json();
+      const [labels, data] = countHouses(characters);
+      loading.remove();
+      renderChart(labels, data);
+    }
+  } catch (error) {
+    console.error('Failed to fetch data from thronesapi', error);
+    loading.textContent = 'Failed to load character data.';
+  }
+};
+
+updatePage();
