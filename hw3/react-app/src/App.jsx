@@ -3,6 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
 import Home from './Home';
+import Houses from './Houses';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Routes>
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/houses" element={<Houses />} />
         </Routes>
       </main>
     </>
