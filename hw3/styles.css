@@ -23,6 +23,10 @@ h1 {
   height: 320px;
 }
 
+.character-card img {
+  object-fit: cover;
+}
+
 .character-card:hover {
   background-color: var(--blue);
 }

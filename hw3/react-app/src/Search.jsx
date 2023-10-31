@@ -76,6 +76,7 @@ function Search() {
         {matchingCharacters.map((c) => (
           <Card className="character-card" key={c.id}>
             <Card.Img
+              className="object-fit-cover"
               variant="top"
               width={180}
               height={200}
