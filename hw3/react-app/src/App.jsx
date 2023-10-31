@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 
 import Home from './Home';
 import Houses from './Houses';
@@ -8,23 +8,18 @@ import Houses from './Houses';
 function App() {
   return (
     <>
-      <Navbar className="bg-body">
-        <Container>
-          <Navbar.Toggle />
-          <Navbar.Collapse>
-            <Nav>
-              <LinkContainer to="/home">
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/search">
-                <Nav.Link>Search</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/houses">
-                <Nav.Link>Houses</Nav.Link>
-              </LinkContainer>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
+      <Navbar className="bg-body ps-3">
+        <Nav>
+          <LinkContainer to="/home">
+            <Nav.Link>Home</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/search">
+            <Nav.Link>Search</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/houses">
+            <Nav.Link>Houses</Nav.Link>
+          </LinkContainer>
+        </Nav>
       </Navbar>
       <main className="container py-4 d-flex justify-content-center">
         <Routes>
