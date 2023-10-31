@@ -3,6 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, Navbar } from 'react-bootstrap';
 
 import Home from './Home';
+import Search from './Search';
 import Houses from './Houses';
 
 function App() {
@@ -21,10 +22,11 @@ function App() {
           </LinkContainer>
         </Nav>
       </Navbar>
-      <main className="container py-4 d-flex justify-content-center">
+      <main className="container py-4 d-flex flex-column justify-content-center">
         <Routes>
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/houses" element={<Houses />} />
         </Routes>
       </main>
