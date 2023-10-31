@@ -113,7 +113,7 @@ function Houses() {
 
   return (
     <>
-      <Card className="w-100 p-3">
+      <Card className="p-3">
         <h1 className="my-3 text-center">House Chart</h1>
         <Doughnut
           className="donut-chart"
