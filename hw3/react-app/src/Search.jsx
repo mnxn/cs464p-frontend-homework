@@ -14,9 +14,8 @@ function Search() {
   const filterCharacters = function filterMatchingCharacters(search) {
     const lowerSearch = search.toLowerCase();
     const matching = allCharacters.current.filter(
-      ({ fullName, title }) =>
-        fullName.toLowerCase().includes(lowerSearch) ||
-        title.toLowerCase().includes(lowerSearch)
+      ({ fullName, title }) => fullName.toLowerCase().includes(lowerSearch)
+        || title.toLowerCase().includes(lowerSearch),
     );
     setMatchingCharacters(matching);
   };

@@ -112,18 +112,16 @@ function Houses() {
   }, []);
 
   return (
-    <>
-      <Card className="p-3">
-        <h1 className="my-3 text-center">House Chart</h1>
-        <Doughnut
-          className="donut-chart"
-          data={chartData}
-          options={chartOptions}
-          aria-label="donut chart"
-          role="img"
-        ></Doughnut>
-      </Card>
-    </>
+    <Card className="p-3">
+      <h1 className="my-3 text-center">House Chart</h1>
+      <Doughnut
+        className="donut-chart"
+        data={chartData}
+        options={chartOptions}
+        aria-label="donut chart"
+        role="img"
+      />
+    </Card>
   );
 }
 
