@@ -10,7 +10,7 @@ import Houses from './Houses';
 // url for the Thrones API
 const url = 'https://thronesapi.com/api/v2/Characters';
 
-function App() {
+const App = function AppComponent() {
   const [characters, setCharacters] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -62,6 +62,6 @@ function App() {
       </main>
     </>
   );
-}
+};
 
 export default App;

@@ -31,6 +31,7 @@ const url = 'https://thronesapi.com/api/v2/Characters';
 
 const loading = document.querySelector('#loading');
 
+// Create a donut chart with the provided labels/data and update the page.
 const renderChart = function renderDonutChart(labels, data) {
   const donutChart = document.querySelector('.donut-chart');
 
@@ -56,15 +57,19 @@ const renderChart = function renderDonutChart(labels, data) {
   });
 };
 
+// Count the number of houses with more than one character.
+// Houses with only one characters are grouped into the other category.
 const countHouses = function collectHouseLabelsAndCounts(characters) {
   const counter = new Map();
   characters.forEach((c) => {
+    // Normalize the family field by removing the House prefix.
+    // Sometimes the data lists the same house both with and without the 'House' prefix.
     const trimmedFamily = c.family.replace(/^House /, '');
     const oldCount = counter.get(trimmedFamily);
     counter.set(
       trimmedFamily,
       oldCount === undefined
-        ? 1 : oldCount + 1,
+        ? 1 : oldCount + 1, // default to 1 if family is not already in the map
     );
   });
 
@@ -88,6 +93,7 @@ const countHouses = function collectHouseLabelsAndCounts(characters) {
   return [labels, counts];
 };
 
+// Fetch all characters from the API and render the chart with the house counts.
 const updatePage = async function fetchAndUpdatePage() {
   try {
     const response = await fetch(url);
