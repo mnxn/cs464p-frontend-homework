@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Card, Container, Form } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 
 import './Search.css';
 
