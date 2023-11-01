@@ -46,7 +46,7 @@ const renderChart = function renderDonutChart(labels, data) {
       labels,
       datasets: [
         {
-          label: 'My First Dataset',
+          label: 'Number of Characters',
           data,
           backgroundColor: backgroundColors,
           borderColor: borderColors,

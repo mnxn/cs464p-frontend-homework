@@ -44,8 +44,7 @@ const countHouses = function collectHouseLabelsAndCounts(characters) {
     const oldCount = counter.get(trimmedFamily);
     counter.set(
       trimmedFamily,
-      oldCount === undefined
-        ? 1 : oldCount + 1, // default to 1 if family is not already in the map
+      oldCount === undefined ? 1 : oldCount + 1, // default to 1 if family is not already in the map
     );
   });
 
@@ -84,7 +83,7 @@ const createChartData = function createDataObject(labels, data) {
     labels,
     datasets: [
       {
-        label: 'My First Dataset',
+        label: 'Number of Characters',
         data,
         backgroundColor: backgroundColors,
         borderColor: borderColors,
