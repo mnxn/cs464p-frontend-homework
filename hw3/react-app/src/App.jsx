@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Alert, Nav, Navbar } from 'react-bootstrap';
 
 import Home from './Home';
 import Search from './Search';
@@ -12,6 +12,7 @@ const url = 'https://thronesapi.com/api/v2/Characters';
 
 function App() {
   const [characters, setCharacters] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     const fetchData = async function fetchCharacterData() {
@@ -22,9 +23,10 @@ function App() {
         }
 
         setCharacters(await response.json());
+        setErrorMessage(null);
       } catch (error) {
         console.error('Failed to fetch data from thronesapi', error);
-        alert('Failed to load character data.');
+        setErrorMessage('Failed to load character data.');
       }
     };
 
@@ -47,6 +49,10 @@ function App() {
         </Nav>
       </Navbar>
       <main className="container py-4 d-flex flex-column justify-content-center">
+        <Alert variant="danger" className="mx-auto" show={errorMessage !== null}>
+          {errorMessage}
+        </Alert>
+
         <Routes>
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<Home />} />
