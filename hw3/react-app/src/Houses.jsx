@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { Doughnut } from 'react-chartjs-2';
-import 'chart.js/auto';
+import 'chart.js/auto'; /// Chart.js fails to load without this import.
 
 import './Houses.css';
 
@@ -33,12 +33,20 @@ const borderColors = [
   'rgba(78, 52, 199, 1)',
 ];
 
+// Count the number of houses with more than one character.
+// Houses with only one characters are grouped into the other category.
 const countHouses = function collectHouseLabelsAndCounts(characters) {
   const counter = new Map();
   characters.forEach((c) => {
+    // Normalize the family field by removing the House prefix.
+    // Sometimes the data lists the same house both with and without the 'House' prefix.
     const trimmedFamily = c.family.replace(/^House /, '');
     const oldCount = counter.get(trimmedFamily);
-    counter.set(trimmedFamily, oldCount === undefined ? 1 : oldCount + 1);
+    counter.set(
+      trimmedFamily,
+      oldCount === undefined
+        ? 1 : oldCount + 1, // default to 1 if family is not already in the map
+    );
   });
 
   const labels = [];
@@ -62,7 +70,7 @@ const countHouses = function collectHouseLabelsAndCounts(characters) {
 };
 
 const chartOptions = {
-  aspectRatio: 2,
+  aspectRatio: 2, // Rectangular chart.
   plugins: {
     legend: {
       position: 'bottom',
@@ -70,6 +78,7 @@ const chartOptions = {
   },
 };
 
+// Create the chart data from the provided labels and data.
 const createChartData = function createDataObject(labels, data) {
   return {
     labels,
@@ -85,7 +94,7 @@ const createChartData = function createDataObject(labels, data) {
   };
 };
 
-function Houses({ characters }) {
+const Houses = function HousesComponent({ characters }) {
   const [chartData, setChartData] = useState(createChartData([], []));
 
   useEffect(() => {
@@ -105,6 +114,6 @@ function Houses({ characters }) {
       />
     </Card>
   );
-}
+};
 
 export default Houses;

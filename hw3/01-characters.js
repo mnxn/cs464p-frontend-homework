@@ -4,6 +4,7 @@ const url = 'https://thronesapi.com/api/v2/Characters';
 const characterContainer = document.querySelector('#character-container');
 const loading = document.querySelector('#loading');
 
+// Create an HTML <section> containing the character's image, full name, and title.
 const characterElement = function createCharacterHtmlElement(character) {
   const section = document.createElement('section');
   section.classList.add(
@@ -32,6 +33,7 @@ const characterElement = function createCharacterHtmlElement(character) {
   return section;
 };
 
+// Fetch all characters from the API and add the characters elements to the page.
 const updatePage = async function fetchAndUpdatePage() {
   try {
     const response = await fetch(url);

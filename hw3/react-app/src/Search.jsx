@@ -3,7 +3,7 @@ import { Card, Form } from 'react-bootstrap';
 
 import './Search.css';
 
-function Search({ characters }) {
+const Search = function SearchComponent({ characters }) {
   const [matchingCharacters, setMatchingCharacters] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -53,6 +53,6 @@ function Search({ characters }) {
       </div>
     </>
   );
-}
+};
 
 export default Search;
