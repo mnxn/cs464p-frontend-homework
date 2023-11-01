@@ -33,9 +33,6 @@ const borderColors = [
   'rgba(78, 52, 199, 1)',
 ];
 
-// url for the Thrones API
-const url = 'https://thronesapi.com/api/v2/Characters';
-
 const countHouses = function collectHouseLabelsAndCounts(characters) {
   const counter = new Map();
   characters.forEach((c) => {
@@ -88,28 +85,13 @@ const createChartData = function createDataObject(labels, data) {
   };
 };
 
-function Houses() {
+function Houses({ characters }) {
   const [chartData, setChartData] = useState(createChartData([], []));
 
   useEffect(() => {
-    const fetchData = async function fetchCharacterHouseData() {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw response;
-        }
-
-        const characters = await response.json();
-        const [labels, data] = countHouses(characters);
-        setChartData(createChartData(labels, data));
-      } catch (error) {
-        console.error('Failed to fetch data from thronesapi', error);
-        alert('Failed to load character data.');
-      }
-    };
-
-    fetchData();
-  }, []);
+    const [labels, data] = countHouses(characters);
+    setChartData(createChartData(labels, data));
+  }, [characters]);
 
   return (
     <Card className="p-3">

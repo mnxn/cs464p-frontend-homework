@@ -1,19 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Container, Form } from 'react-bootstrap';
 
 import './Search.css';
 
-// url for the Thrones API
-const url = 'https://thronesapi.com/api/v2/Characters';
-
-function Search() {
-  const allCharacters = useRef([]);
+function Search({ characters }) {
   const [matchingCharacters, setMatchingCharacters] = useState([]);
   const [searchInput, setSearchInput] = useState('');
 
   const filterCharacters = function filterMatchingCharacters(search) {
     const lowerSearch = search.toLowerCase();
-    const matching = allCharacters.current.filter(
+    const matching = characters.filter(
       ({ fullName, title }) => fullName.toLowerCase().includes(lowerSearch)
         || title.toLowerCase().includes(lowerSearch),
     );
@@ -21,23 +17,8 @@ function Search() {
   };
 
   useEffect(() => {
-    const fetchData = async function fetchCharacterData() {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw response;
-        }
-
-        allCharacters.current = await response.json();
-        filterCharacters('');
-      } catch (error) {
-        console.error('Failed to fetch data from thronesapi', error);
-        alert('Failed to load character data.');
-      }
-    };
-
-    fetchData();
-  }, []);
+    setMatchingCharacters(characters);
+  }, [characters]);
 
   return (
     <>
