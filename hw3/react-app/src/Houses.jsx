@@ -33,17 +33,40 @@ const borderColors = [
   'rgba(78, 52, 199, 1)',
 ];
 
+// Normalize the family field by removing the House prefix and fixing house typos.
+// Sometimes the data lists the same house both with and without the 'House' prefix.
+const normalizeFamily = function normalizeFamilyName(family) {
+  const trimmed = family.replace(/^House /, '');
+
+  switch (trimmed) {
+    case 'Targaryan':
+      return 'Targaryen';
+
+    case 'Lanister':
+      return 'Lannister';
+
+    case 'Lorathi':
+      return 'Lorath';
+
+    case '':
+    case 'None':
+    case 'Unkown':
+      return 'Unknown';
+
+    default:
+      return trimmed;
+  }
+};
+
 // Count the number of houses with more than one character.
 // Houses with only one characters are grouped into the other category.
 const countHouses = function collectHouseLabelsAndCounts(characters) {
   const counter = new Map();
   characters.forEach((c) => {
-    // Normalize the family field by removing the House prefix.
-    // Sometimes the data lists the same house both with and without the 'House' prefix.
-    const trimmedFamily = c.family.replace(/^House /, '');
-    const oldCount = counter.get(trimmedFamily);
+    const family = normalizeFamily(c.family);
+    const oldCount = counter.get(family);
     counter.set(
-      trimmedFamily,
+      family,
       oldCount === undefined ? 1 : oldCount + 1, // default to 1 if family is not already in the map
     );
   });
@@ -53,11 +76,11 @@ const countHouses = function collectHouseLabelsAndCounts(characters) {
   let other = 0;
 
   counter.forEach((count, family) => {
-    if (count > 1) {
+    if (count >= 1 && family !== 'Unknown') { // group unknown into other
       labels.push(family);
       counts.push(count);
     } else {
-      other += 1;
+      other += count;
     }
   });
 
