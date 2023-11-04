@@ -67,7 +67,7 @@ const countHouses = function collectHouseLabelsAndCounts(characters) {
     const oldCount = counter.get(family);
     counter.set(
       family,
-      oldCount === undefined ? 1 : oldCount + 1, // default to 1 if family is not already in the map
+      oldCount === undefined ? 1 : oldCount + 1 // default to 1 if family is not already in the map
     );
   });
 
@@ -75,8 +75,12 @@ const countHouses = function collectHouseLabelsAndCounts(characters) {
   const counts = [];
   let other = 0;
 
+  // Iterate over all family counts to create the label and data arrays for the chart.
+  // If there is only 1 character in the family, or the family is unknown,
+  // the count is grouped into the Other family.
   counter.forEach((count, family) => {
-    if (count >= 1 && family !== 'Unknown') { // group unknown into other
+    if (count > 1 && family !== 'Unknown') {
+      // group unknown into other
       labels.push(family);
       counts.push(count);
     } else {
